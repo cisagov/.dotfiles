@@ -1,0 +1,16 @@
+#!/bin/zsh
+# shellcheck shell=bash
+
+# Set pip cache
+export PIP_DOWNLOAD_CACHE=$HOME/Library/Caches/pip-downloads
+
+# Upgrade all outdated packages
+pipupgrade () {
+  local OLD
+  local OLDFMT
+  echo "Collecting info on outdated packages..."
+  OLD=$(pip3 list --outdated --format=freeze)
+  OLDFMT=$(echo "${OLD}" | grep -v '^\-e' | cut -d = -f 1)
+  echo "Outdated packages: $OLDFMT"
+  $OLDFMT | xargs -n1 pip3 install -U
+}

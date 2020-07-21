@@ -1,0 +1,7 @@
+#!/bin/zsh
+# shellcheck shell=bash
+
+# Make it so gnu-sed replaces the MacOS version of sed
+# If not installed, brew install gnu-sed first
+
+PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"

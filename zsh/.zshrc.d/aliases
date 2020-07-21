@@ -1,0 +1,40 @@
+#!/bin/zsh
+# shellcheck shell=bash
+
+# Make some possibly destructive commands more interactive.
+if [ ${UID} -eq 0 ]; then
+    alias rm='rm -i'
+    alias mv='mv -i'
+    alias cp='cp -i'
+fi
+
+# Add some easy shortcuts for formatted directory listings
+alias ll='ls -alF'
+alias la='ls -alF'
+alias ls='ls -lF'
+
+# Make grep more user friendly by highlighting matches
+# and exclude grepping through .svn folders.
+#alias grep='grep --color=auto --exclude=\.svn'
+alias grep='grep --color=auto --exclude-dir=.hg --exclude-dir=.svn --exclude-dir=.git'
+
+alias fuck='sudo $(history -p \!\!)'
+
+# Workaround for a Mac-specific issue that affects ansible
+# See https://github.com/ansible/ansible/issues/32499 for details
+alias packer='OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES packer'
+alias molecule='OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES molecule'
+
+# From: https://www.quora.com/What-are-some-useful-bash_profile-and-bashrc-tips
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+#alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias bonk='osascript -e beep; osascript -e beep'
+alias badge="tput bel"
+alias alert='osascript -e beep; osascript -e beep'
+
+# Get date/time
+alias dt='date "+%F %T"'
+
+# Alias the cisagov laptop script
+alias laptop='bash <(curl -s https://raw.githubusercontent.com/cisagov/laptop/master/laptop)'

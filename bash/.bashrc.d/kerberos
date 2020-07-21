@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Load MIT Kerberos (installed via brew) before the default
+export PATH="/usr/local/opt/krb5/bin:/usr/local/opt/krb5/sbin:$PATH"

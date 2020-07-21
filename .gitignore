@@ -1,3 +1,16 @@
+.DS_Store
 .mypy_cache
 .python-version
 __pycache__
+atom/.atom/.*
+atom/.atom/blob-store
+atom/.atom/compile-cache
+atom/.atom/github.cson
+atom/.atom/packages/
+atom/.atom/storage/
+gpg/.gnupg/*.gpg
+gpg/.gnupg/*.kbx
+gpg/.gnupg/private-keys-*.d/
+gpg/.gnupg/reader_*.status
+gpg/.gnupg/sshcontrol
+ssh/.ssh/known_hosts

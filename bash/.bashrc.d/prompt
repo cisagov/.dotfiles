@@ -1,0 +1,84 @@
+#!/bin/bash
+
+BLUE=$(tput setaf 4)
+BRIGHT_GREEN=$(tput setaf 10)
+BRIGHT_RED=$(tput setaf 196)
+DARK_GREY=$(tput setaf 236)
+DARK_RED=$(tput setaf 88)
+GREEN=$(tput setaf 2)
+MED_BLUE=$(tput setaf 63)
+RED=$(tput setaf 9)
+RESET=$(tput sgr0)
+YELLOW=$(tput setaf 3)
+
+LINECHAR="─"
+PREFIX="❱" # U+2771
+
+if [ ${UID} -eq 0 ]; then
+    # root will autologout after 10 minutes
+    export TMOUT=1200
+    PROMPT_COLOR=$BRIGHT_RED
+    PREFIX_COLOR=$BRIGHT_RED
+    LINE_COLOR=$DARK_RED
+    PREFIX="➤"
+else
+    PROMPT_COLOR=$MED_BLUE
+    PREFIX_COLOR=$BRIGHT_GREEN
+    LINE_COLOR=$DARK_GREY
+fi
+
+if [[ $(locale charmap) != UTF-8 ]] || [ "$TERM" = linux ]; then
+    PREFIX=">"
+    LINECHAR="-"
+    LINE_COLOR=""
+fi
+
+# Other possible prefix characters:
+# Gullimet           U+00BB »
+# Electric arrow     U+2301 ⌁
+# Bullet             U+2202 •
+# The following are wider than the fixed-width column:
+# Sine wave          U+223F ∿
+# Much greater than  U+226B ≫
+# Arrowhead          U+27A4 ➤
+# Round arrow        U+279C ➜
+
+# Magic sent to Mac Terminal to update window header
+update_terminal_cwd ()  {
+    local SEARCH=' ';
+    local REPLACE='%20';
+    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}";
+    printf '\e]7;%s\a' "$PWD_URL";
+}
+
+echo_line() {
+  local FILL
+  let fillsize=${COLUMNS}-9
+  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 $fillsize))
+  echo "${LINE_COLOR}${FILL} $(date +%H:%M:%S)"
+}
+
+calculate_ps1 () {
+  if [ -v VIRTUAL_ENV ]; then
+      PYTHON_PROMPT="(🐍${VIRTUAL_ENV##*/})"
+  else
+      unset PYTHON_PROMPT
+  fi
+
+  # Make sure PS1 uses RL_PROMPT_START_IGNORE and RL_PROMPT_END_IGNORE
+  # \[ \] are evaluated at assignment and coverted to \001 and \002 for
+  # readline.
+
+  PS1="\[${PROMPT_COLOR}\]\u@\h\[${GREEN}\]${PYTHON_PROMPT}"
+  PS1+="\[${YELLOW}\] \w \[${PREFIX_COLOR}\]${PREFIX}\[${RESET}\] "
+}
+
+upinfo () {
+  echo -ne "${green}$HOSTNAME ${red}uptime is ${cyan} \t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
+}
+
+if [[ $OSTYPE == "darwin"* ]]; then
+  PROMPT_COMMAND="$PROMPT_COMMAND; update_terminal_cwd; echo_line; calculate_ps1"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; echo_line; calculate_ps1"
+fi

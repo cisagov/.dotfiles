@@ -1,0 +1,183 @@
+#!/bin/bash
+
+COLUMNS=$(tput cols)
+
+# List all colors
+# ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )
+
+
+NORMAL=$(tput sgr0) # Reset text format to the terminal's default
+
+
+# -------------------------------
+
+BOLD=$(tput bold)
+DIM=$(tput dim)
+UNDERLINE=$(tput smul)
+BLINK=$(tput blink)
+REVERSE=$(tput smso)
+
+# -------------------------------
+
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+GREY=$(tput setaf 8)
+
+# -------------------------------
+
+BETTER_YELLOW=$(tput setaf 220)
+LIME_YELLOW=$(tput setaf 190)
+POWDER_BLUE=$(tput setaf 153)
+ORANGE=$(tput setaf 172)
+PURPLE=$(tput setaf 141)
+BETTER_GREY=$(tput setaf 245)
+
+
+
+__print_line ()
+{
+    local line
+    let fillsize=${COLUMNS}-9
+    line=$(printf '─%.0s' $(seq 1 $fillsize))
+
+
+    printf "${GREY}"
+    __print_centered_string "$line" "0"
+    printf "\n"
+}
+
+__print_ascii_art ()
+{
+    printf "%s\n" "$1" | figlet -w $COLUMNS -c
+}
+
+
+__print_centered_string ()
+{
+    local c_string="$1"
+    local mid=$(((${#c_string}+$COLUMNS)/2))
+    local leftspace=$((${mid}-${#c_string}))
+
+    printf "%-*s%s\n" $leftspace " " "$c_string"
+}
+
+
+# Args: stringvar, offset
+__print_centered_multiline ()
+{
+    # Find longest string
+    local strlen=0
+    local offset=$2
+    while IFS= read -r line
+    do
+        # Store length
+        if [ ${#line} -gt $strlen ]; then
+            strlen="${#line}"
+        fi
+    done <<< "$1"
+
+    # Apply offset
+    strlen=$(($strlen-$offset))
+
+    # Print each line with offset of longest string
+    while IFS= read -r line
+    do
+        __print_fixed_singleline "$line" $strlen
+    done <<< "$1"
+
+    strlen=0
+}
+
+__print_fixed_singleline ()
+{
+    local c_string="$1"
+    local mid=$(((strlen+$COLUMNS)/2))
+    local leftspace=$((${mid}-strlen))
+
+    printf "%-*s%s\n" $leftspace " " "$c_string"
+}
+
+__print_greeting ()
+{
+    local STR_GREETING="-= welcome =-"
+
+    if [[ $(which figlet) ]]; then
+        #Print hostename with figlets
+        __print_ascii_art "$STR_GREETING"
+    else
+        __print_centered_string "$STR_GREETING" "0"
+    fi
+}
+
+
+__print_sysinfo ()
+{
+    local SYS_INFO
+    if [[ $OSTYPE == "darwin"* ]]; then
+        SYS_INFO=$(uname -srm)
+    elif [[ $OSTYPE == "linux-gnu" ]]; then
+        SYS_INFO=$(uname -srmo)
+    else
+        SYS_INFO=$(uname)
+    fi
+
+    SYS_INFO="-= $SYS_INFO =-"
+
+    printf ${ORANGE}
+    __print_centered_string "$SYS_INFO" "0"
+
+    printf "${NORMAL}\n"
+}
+
+
+__print_diskinfo ()
+{
+    local DISK_INFO
+    # disk usage, minus def and swap
+    if [[ $OSTYPE == "darwin"* ]]; then
+        DISK_INFO=$(df -h -l | awk '{OFS = "\t"; print $2,$3,$4,$5,$9}')
+    elif [[ $OSTYPE == "linux-gnu" ]]; then
+        DISK_INFO=$(df -h -x tmpfs -x devtmpfs -x ecryptfs -x fuse.encfs -T)
+    else
+        DISK_INFO=$(df)
+    fi
+    printf ${POWDER_BLUE}
+    __print_centered_multiline "$DISK_INFO" "0"
+    # printf "%s\n" "$DISK_INFO" | boxes -d ada-box -ph8v1
+
+    printf "${NORMAL}\n"
+}
+
+__print_lastlogins ()
+{
+    local LAST_LOGINS
+    # LAST_LOGINS=$(last -in 3 -ad)
+    # printf "%s\n" "$LAST_LOGINS" | boxes -d ada-box -ph8v1
+    #local linecount=$(printf "%s\n" "$LAST_LOGINS" | grep -c '^')
+    if [[ $OSTYPE == "darwin"* ]]; then
+        LAST_LOGINS=$(last -3)
+    elif [[ $OSTYPE == "linux-gnu" ]]; then
+        LAST_LOGINS=$(last -in 3 -ad)
+    else
+        LAST_LOGINS=$(last)
+    fi
+
+    printf ${GREY}
+    __print_centered_multiline "$LAST_LOGINS" "0"
+
+    printf "${NORMAL}\n"
+}
+
+# Call functions
+__print_greeting
+__print_sysinfo
+__print_line
+#__print_diskinfo
+#__print_line
+#__print_lastlogins

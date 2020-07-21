@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Add pyenv to PATH
+export PATH="$PATH:$HOME/.pyenv/bin"
+
+# For compilers to find python@3.8 you may need to set:
+export LDFLAGS="-L/usr/local/opt/python@3.8/lib"
+
+# For pkg-config to find python@3.8 you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/python@3.8/lib/pkgconfig"
+
+# pyenv setup
+eval "$(pyenv init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+# Pyenv-virtualenvwrapper
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+export WORKON_HOME=$HOME/.virtualenvs
+pyenv virtualenvwrapper_lazy

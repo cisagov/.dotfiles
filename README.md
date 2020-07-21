@@ -1,16 +1,40 @@
-# .dotfiles #
+# .dotfiles - Portable configuration files #
 
 [![GitHub Build Status](https://github.com/cisagov/.dotfiles/workflows/build/badge.svg)](https://github.com/cisagov/.dotfiles/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub project started.
-This skeleton project contains [licensing information](LICENSE), as
-well as [pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+This is an example repository for using a `.dotfiles` repository with `stow`
+to make your preferences portable across machines.
 
-In many cases you will instead want to use one of the more specific
-skeleton projects derived from this one.
+Fork this repo so you can customize it with your own information.
+
+## Prerequisites ##
+
+You'll need a working installation of [`stow`](https://www.gnu.org/software/stow/).
+The easiest way is [Homebrew](https://brew.sh).
+
+## Repo Usage ##
+
+1. Check out the repository into your home directory:
+
+```sh
+cd ~
+git clone git@github.com:cisagov/.dotfiles.git
+```
+
+1. Stow all the packages from `.dotfiles` into your home directory either via
+the [`deploy.sh` script](deploy.sh).
+
+## Customization ##
+
+You'll want to make some changes, e.g. username and email should be set to your
+own. You can do this by editing the files in your new `~/.dotfiles` folder.
+
+Generate a GPG key to sign your git commits etc and add it to the `.gitconfig`
+file - follow the prompts:
+
+```bash
+gpg --gen-key
+```
 
 ## Contributing ##
 

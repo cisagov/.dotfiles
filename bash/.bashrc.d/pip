@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# pip cache
+export PIP_DOWNLOAD_CACHE=$HOME/Library/Caches/pip-downloads

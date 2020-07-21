@@ -1,0 +1,19 @@
+[core]
+	excludesfile = ~/.gitignore_global
+[user]
+	name = User
+	email = username@example.com
+	signingkey = example
+[commit]
+	gpgsign = true
+[merge]
+	tool = opendiff
+[diff]
+	tool = opendiff
+[alias]
+	quickserve = daemon --verbose --export-all --base-path=.git --reuseaddr --strict-paths .git/
+[credential "https://git-codecommit.us-east-1.amazonaws.com/v1/repos"]
+	helper = !aws --profile terraform-role codecommit credential-helper $@
+	UseHttpPath = true
+[gpg]
+	program = /usr/local/bin/gpg

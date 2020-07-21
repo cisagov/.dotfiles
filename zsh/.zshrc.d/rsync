@@ -1,0 +1,4 @@
+#!/bin/zsh
+# shellcheck shell=bash
+
+export RSYNC_RSH=ssh

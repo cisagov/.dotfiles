@@ -1,0 +1,4 @@
+#!/bin/zsh
+# shellcheck shell=bash
+
+export AWS_PROFILE="cool-user"

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+export CYHY_CONF_DIR=/private/etc/cyhy
