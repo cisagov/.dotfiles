@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# shellcheck disable=SC2034 # Allow colors not currently in use to remain
+# Disable SC2034 to allow colors not currently in use to remain
+# shellcheck disable=SC2034
 BLUE=$(tput setaf 4)
 BRIGHT_GREEN=$(tput setaf 10)
 BRIGHT_RED=$(tput setaf 196)
