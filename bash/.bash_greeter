@@ -1,5 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC2034 # Allow colors not currently in use to remain
+# shellcheck disable=SC2034
+# Disabled SC2034 to allow colors not currently in use to remain
 
 COLUMNS=$(tput cols)
 
