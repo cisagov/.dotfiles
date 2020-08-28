@@ -4,6 +4,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+# shellcheck source=/dev/null
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -18,7 +19,7 @@ export PATH=$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,19 +69,19 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-HIST_STAMPS="yyyy-mm-dd"
+export HIST_STAMPS="yyyy-mm-dd"
 
 # Use another custom folder than $ZSH/custom - set to a folder in .dotfiles stowage
-ZSH_CUSTOM=$HOME/.zsh/custom
+export ZSH_CUSTOM=$HOME/.zsh/custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws gitfast ssh-agent terraform)
+export plugins=(aws gitfast ssh-agent terraform)
 
-ZSH_DISABLE_COMPFIX="true"
+export ZSH_DISABLE_COMPFIX="true"
 
 # Source the oh-my-zsh file, uncomment if installed
 # source $ZSH/oh-my-zsh.sh
@@ -120,7 +121,7 @@ alias reload='source ~/.zshrc'
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r"
 export HISTCONTROL=ignoreboth:erasedups
 
-# make the history larger
+# Make the history larger
 export HISTFILESIZE=4096
 export HISTSIZE=4096
 
@@ -156,8 +157,8 @@ fi
 # Display something cool as a welcome screen
 source ~/.bash_greeter
 
-## Added by cisagov laptop script
-## Leave these lines here but commented out so it doesn't re-add them
+# Added by cisagov laptop script
+# Leave these lines here but commented out so it doesn't re-add them
 
 # alias laptop='bash <(curl -s https://raw.githubusercontent.com/cisagov/laptop/master/laptop)'
 # export PATH="$HOME/.bin:$PATH"

@@ -8,7 +8,7 @@ else
     set t_Sf=[3%dm
     set t_Sb=[4%dm
 endif
-						
+
 set nocompatible
 let cpo_save=&cpo
 set cpo=B
@@ -53,7 +53,7 @@ set nohlsearch
 let java_allow_cpp_keywords=1
 let java_highlight_functions=1
 let java_highlight_java_lang_ids=1
-syntax on 
+syntax on
 set laststatus=2
 set statusline=%<%F%=\ [%1*%M%*%n%R%H]\ \ %-25(%3l,%c%03V\ \ %P\ (%L)%)%12o'%03B'
 " Allow saving of files as sudo when I forgot to start vim using sudo.

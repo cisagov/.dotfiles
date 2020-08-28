@@ -1,9 +1,10 @@
 #!/bin/bash
+# shellcheck disable=SC2004,SC2034,SC2059
 
 COLUMNS=$(tput cols)
 
-# List all colors
-# ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )
+# List all colors - uncomment to test
+#( x=$(tput op) y=$(printf %$((COLUMNS-6))s);for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} "$(tput setaf "$i";tput setab "$i")""${y// /=}""$x";done; )
 
 
 NORMAL=$(tput sgr0) # Reset text format to the terminal's default
@@ -43,9 +44,8 @@ BETTER_GREY=$(tput setaf 245)
 __print_line ()
 {
     local line
-    let fillsize=${COLUMNS}-9
-    line=$(printf '─%.0s' $(seq 1 $fillsize))
-
+    (( fillsize=COLUMNS-9 ))
+    line=$(printf '─%.0s' $(seq 1 "$fillsize"))
 
     printf "${GREY}"
     __print_centered_string "$line" "0"
@@ -54,14 +54,14 @@ __print_line ()
 
 __print_ascii_art ()
 {
-    printf "%s\n" "$1" | figlet -w $COLUMNS -c
+    printf "%s\n" "$1" | figlet -w "$COLUMNS" -c
 }
 
 
 __print_centered_string ()
 {
     local c_string="$1"
-    local mid=$(((${#c_string}+$COLUMNS)/2))
+    local mid=$(((${#c_string}+COLUMNS)/2))
     local leftspace=$((${mid}-${#c_string}))
 
     printf "%-*s%s\n" $leftspace " " "$c_string"
@@ -97,7 +97,7 @@ __print_centered_multiline ()
 __print_fixed_singleline ()
 {
     local c_string="$1"
-    local mid=$(((strlen+$COLUMNS)/2))
+    local mid=$(((strlen+COLUMNS)/2))
     local leftspace=$((${mid}-strlen))
 
     printf "%-*s%s\n" $leftspace " " "$c_string"
@@ -129,7 +129,7 @@ __print_sysinfo ()
 
     SYS_INFO="-= $SYS_INFO =-"
 
-    printf ${ORANGE}
+    printf "${ORANGE}"
     __print_centered_string "$SYS_INFO" "0"
 
     printf "${NORMAL}\n"
@@ -147,8 +147,8 @@ __print_diskinfo ()
     else
         DISK_INFO=$(df)
     fi
-    printf ${POWDER_BLUE}
-    __print_centered_multiline "$DISK_INFO" "0"
+    printf "${POWDER_BLUE}"
+    __print_centered_multiline "$DISK_INFO" "0" "${POWDER_BLUE}"
     # printf "%s\n" "$DISK_INFO" | boxes -d ada-box -ph8v1
 
     printf "${NORMAL}\n"
@@ -168,13 +168,13 @@ __print_lastlogins ()
         LAST_LOGINS=$(last)
     fi
 
-    printf ${GREY}
+    printf "${GREY}"
     __print_centered_multiline "$LAST_LOGINS" "0"
 
     printf "${NORMAL}\n"
 }
 
-# Call functions
+# Call functions - uncomment what you'd like displayed
 __print_greeting
 __print_sysinfo
 __print_line

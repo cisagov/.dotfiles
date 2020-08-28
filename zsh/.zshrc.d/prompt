@@ -1,5 +1,6 @@
 #!/bin/zsh
 # shellcheck shell=bash
+# shellcheck disable=SC2034
 
 BLUE=$(tput setaf 4)
 BRIGHT_GREEN=$(tput setaf 10)
@@ -54,8 +55,8 @@ update_terminal_cwd ()  {
 
 echo_line() {
   local FILL
-  let fillsize=${COLUMNS}-9
-  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 $fillsize))
+  (( fillsize=COLUMNS-9 ))
+  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 fillsize))
   echo "${LINE_COLOR}${FILL} $(date +%H:%M:%S)"
 }
 
@@ -75,7 +76,7 @@ calculate_ps1 () {
 }
 
 upinfo () {
-  echo -ne "${green}$HOSTNAME ${red}uptime is ${cyan} \t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
+  echo -ne "${GREEN}$HOSTNAME ${RED}uptime is ${CYAN} \t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
 }
 
 if [[ $OSTYPE == "darwin"* ]]; then

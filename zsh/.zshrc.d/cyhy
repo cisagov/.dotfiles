@@ -7,4 +7,3 @@ export CYHY_CORE_IMAGE=ncats/cyhy-core
 
 # Set up CyHy aliases
 eval "$(docker run ncats/cyhy-core)"
-

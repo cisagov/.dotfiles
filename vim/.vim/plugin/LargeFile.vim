@@ -58,7 +58,7 @@ fun! s:LargeFile(force,fname)
    au LargeFile BufEnter <buffer> set ul=-1
    exe "au LargeFile BufLeave <buffer> let &ul=".b:LF_ulkeep."|set ei=".b:LF_eikeep
    au LargeFile BufUnload <buffer> au! LargeFile * <buffer>
-   echomsg "***note*** handling a large file" 
+   echomsg "***note*** handling a large file"
   endif
 "  call Dret("s:LargeFile")
 endfun
@@ -103,7 +103,7 @@ fun! s:Unlarge()
   if exists("b:LF_eikeep") |let &ei    = b:LF_eikeep |unlet b:LF_eikeep |endif
   if exists("b:LF_cptkeep")|let &cpt   = b:LF_cptkeep|unlet b:LF_cptkeep|endif
   if exists("b:LF_nmpkeep")
-   DoMatchParen          
+   DoMatchParen
    unlet b:LF_nmpkeep
   endif
   syn on

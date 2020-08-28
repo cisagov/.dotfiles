@@ -40,6 +40,7 @@ repos:
     rev: 1.0.5
     hooks:
       - id: shell-lint
+        exclude: zsh/.p10k.zsh
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.8.3
     hooks:
