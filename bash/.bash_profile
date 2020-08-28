@@ -2,6 +2,6 @@
 
 # Workaround to get macOS to use .bashrc
 if [[ "$OSTYPE" == "darwin"* ]] && [ -r "$HOME/.bashrc" ]; then
-  # shellcheck disable=SC1090
+  # shellcheck source=/dev/null
   source "$HOME/.bashrc"
 fi

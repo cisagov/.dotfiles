@@ -1,5 +1,4 @@
 #!/bin/zsh
-# shellcheck shell=bash
 
 # Set pip cache
 export PIP_DOWNLOAD_CACHE=$HOME/Library/Caches/pip-downloads

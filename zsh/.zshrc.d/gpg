@@ -1,5 +1,4 @@
 #!/bin/zsh
-# shellcheck shell=bash
 
 # From gpg-agent manpage
 GPG_TTY=$(tty)

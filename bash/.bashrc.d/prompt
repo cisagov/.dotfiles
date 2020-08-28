@@ -1,6 +1,6 @@
 #!/bin/bash
-# shellcheck disable=SC2034
 
+# shellcheck disable=SC2034 # Allow colors not currently in use to remain
 BLUE=$(tput setaf 4)
 BRIGHT_GREEN=$(tput setaf 10)
 BRIGHT_RED=$(tput setaf 196)
@@ -54,8 +54,8 @@ update_terminal_cwd ()  {
 
 echo_line() {
   local FILL
-  (( fillsize=COLUMNS-9 ))
-  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 fillsize))
+  (( fillsize = COLUMNS-9 ))
+  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 "$fillsize"))
   echo "${LINE_COLOR}${FILL} $(date +%H:%M:%S)"
 }
 

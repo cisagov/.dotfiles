@@ -1,5 +1,4 @@
 #!/bin/bash
-# shellcheck disable=1090
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -48,8 +47,11 @@ then
   done
 fi
 
+# shellcheck source=/dev/null
 source "$HOME/.bash_greeter"
 
 export NVM_DIR="$HOME/.nvm"
+# shellcheck source=/dev/null
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# shellcheck source=/dev/null
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

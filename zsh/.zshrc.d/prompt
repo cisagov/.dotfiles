@@ -1,6 +1,4 @@
 #!/bin/zsh
-# shellcheck shell=bash
-# shellcheck disable=SC2034
 
 BLUE=$(tput setaf 4)
 BRIGHT_GREEN=$(tput setaf 10)
