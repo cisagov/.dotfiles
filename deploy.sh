@@ -6,11 +6,6 @@ set -o pipefail
 
 echo "Finding dotfiles to deploy via stow..."
 
-find . -maxdepth 1 -mindepth 1 -type d -not -name ".git" -exec basename {} \; > tmp
-while IFS= read -r d
-do
-  stow -v -R -t ~ "$d"
-done < tmp
-rm tmp
+find . -maxdepth 1 -mindepth 1 -type d -not -name ".git" -exec echo stow -v -R -t ~ "$(basename {})" \;
 
 echo "Dotfile stow deployment complete!"
