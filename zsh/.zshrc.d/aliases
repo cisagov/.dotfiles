@@ -1,5 +1,4 @@
 #!/bin/zsh
-# shellcheck shell=bash
 
 # Make some possibly destructive commands more interactive.
 if [ ${UID} -eq 0 ]; then

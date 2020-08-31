@@ -1,9 +1,11 @@
 #!/bin/bash
+# shellcheck disable=SC2034
+# Disabled SC2034 to allow colors not currently in use to remain
 
 COLUMNS=$(tput cols)
 
-# List all colors
-# ( x=`tput op` y=`printf %$((${COLUMNS}-6))s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done; )
+# List all colors - uncomment to test
+#( x=$(tput op) y=$(printf %$((COLUMNS-6))s);for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} "$(tput setaf "$i";tput setab "$i")""${y// /=}""$x";done; )
 
 
 NORMAL=$(tput sgr0) # Reset text format to the terminal's default
@@ -43,10 +45,11 @@ BETTER_GREY=$(tput setaf 245)
 __print_line ()
 {
     local line
-    let fillsize=${COLUMNS}-9
-    line=$(printf '─%.0s' $(seq 1 $fillsize))
+    (( fillsize=COLUMNS-9 ))
+    line=$(printf '─%.0s' $(seq 1 "$fillsize"))
 
-
+    # Following shellcheck's guidance displays tons of extra lines
+    # shellcheck disable=SC2059
     printf "${GREY}"
     __print_centered_string "$line" "0"
     printf "\n"
@@ -54,15 +57,15 @@ __print_line ()
 
 __print_ascii_art ()
 {
-    printf "%s\n" "$1" | figlet -w $COLUMNS -c
+    printf "%s\n" "$1" | figlet -w "$COLUMNS" -c
 }
 
 
 __print_centered_string ()
 {
     local c_string="$1"
-    local mid=$(((${#c_string}+$COLUMNS)/2))
-    local leftspace=$((${mid}-${#c_string}))
+    local mid=$(((${#c_string}+COLUMNS)/2))
+    local leftspace=$((mid-${#c_string}))
 
     printf "%-*s%s\n" $leftspace " " "$c_string"
 }
@@ -83,7 +86,7 @@ __print_centered_multiline ()
     done <<< "$1"
 
     # Apply offset
-    strlen=$(($strlen-$offset))
+    strlen=$((strlen-offset))
 
     # Print each line with offset of longest string
     while IFS= read -r line
@@ -97,8 +100,8 @@ __print_centered_multiline ()
 __print_fixed_singleline ()
 {
     local c_string="$1"
-    local mid=$(((strlen+$COLUMNS)/2))
-    local leftspace=$((${mid}-strlen))
+    local mid=$(((strlen+COLUMNS)/2))
+    local leftspace=$((mid-strlen))
 
     printf "%-*s%s\n" $leftspace " " "$c_string"
 }
@@ -129,9 +132,12 @@ __print_sysinfo ()
 
     SYS_INFO="-= $SYS_INFO =-"
 
-    printf ${ORANGE}
+    # Following shellcheck's guidance displays tons of extra lines
+    # shellcheck disable=SC2059
+    printf "${ORANGE}"
     __print_centered_string "$SYS_INFO" "0"
 
+    # shellcheck disable=SC2059
     printf "${NORMAL}\n"
 }
 
@@ -147,10 +153,14 @@ __print_diskinfo ()
     else
         DISK_INFO=$(df)
     fi
-    printf ${POWDER_BLUE}
-    __print_centered_multiline "$DISK_INFO" "0"
+
+    # Following shellcheck's guidance displays tons of extra lines
+    # shellcheck disable=SC2059
+    printf "${POWDER_BLUE}"
+    __print_centered_multiline "$DISK_INFO" "0" "${POWDER_BLUE}"
     # printf "%s\n" "$DISK_INFO" | boxes -d ada-box -ph8v1
 
+    # shellcheck disable=SC2059
     printf "${NORMAL}\n"
 }
 
@@ -159,7 +169,7 @@ __print_lastlogins ()
     local LAST_LOGINS
     # LAST_LOGINS=$(last -in 3 -ad)
     # printf "%s\n" "$LAST_LOGINS" | boxes -d ada-box -ph8v1
-    #local linecount=$(printf "%s\n" "$LAST_LOGINS" | grep -c '^')
+    # local linecount=$(printf "%s\n" "$LAST_LOGINS" | grep -c '^')
     if [[ $OSTYPE == "darwin"* ]]; then
         LAST_LOGINS=$(last -3)
     elif [[ $OSTYPE == "linux-gnu" ]]; then
@@ -168,13 +178,16 @@ __print_lastlogins ()
         LAST_LOGINS=$(last)
     fi
 
-    printf ${GREY}
+    # Following shellcheck's guidance displays tons of extra lines
+    # shellcheck disable=SC2059
+    printf "${GREY}"
     __print_centered_multiline "$LAST_LOGINS" "0"
 
+    # shellcheck disable=SC2059
     printf "${NORMAL}\n"
 }
 
-# Call functions
+# Call functions - uncomment what you'd like displayed
 __print_greeting
 __print_sysinfo
 __print_line

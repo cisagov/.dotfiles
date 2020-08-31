@@ -1,5 +1,4 @@
 #!/bin/zsh
-# shellcheck shell=bash
 
 # Add pyenv to PATH
 export PATH="$PATH:$HOME/.pyenv/bin"

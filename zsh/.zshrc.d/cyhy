@@ -1,5 +1,4 @@
 #!/bin/zsh
-# shellcheck shell=bash
 
 # Set up CyHy docker environment variables
 export CYHY_CONF_DIR=/private/etc/cyhy
@@ -7,4 +6,3 @@ export CYHY_CORE_IMAGE=ncats/cyhy-core
 
 # Set up CyHy aliases
 eval "$(docker run ncats/cyhy-core)"
-

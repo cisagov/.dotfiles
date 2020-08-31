@@ -47,10 +47,11 @@ then
   done
 fi
 
-# shellcheck source=.bash_greeter
-source ~/.bash_greeter
+# shellcheck source=/dev/null
+source "$HOME/.bash_greeter"
 
-# Set up NVM
 export NVM_DIR="$HOME/.nvm"
+# shellcheck source=/dev/null
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# shellcheck source=/dev/null
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

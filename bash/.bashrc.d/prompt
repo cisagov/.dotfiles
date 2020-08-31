@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Disable SC2034 to allow colors not currently in use to remain
+# shellcheck disable=SC2034
 BLUE=$(tput setaf 4)
 BRIGHT_GREEN=$(tput setaf 10)
 BRIGHT_RED=$(tput setaf 196)
@@ -11,8 +13,8 @@ RED=$(tput setaf 9)
 RESET=$(tput sgr0)
 YELLOW=$(tput setaf 3)
 
-LINECHAR="─"
-PREFIX="❱" # U+2771
+LINE_CHAR="─"
+PREFIX_CHAR="❱" # U+2771
 
 if [ ${UID} -eq 0 ]; then
     # root will autologout after 10 minutes
@@ -20,7 +22,7 @@ if [ ${UID} -eq 0 ]; then
     PROMPT_COLOR=$BRIGHT_RED
     PREFIX_COLOR=$BRIGHT_RED
     LINE_COLOR=$DARK_RED
-    PREFIX="➤"
+    PREFIX_CHAR="➤"
 else
     PROMPT_COLOR=$MED_BLUE
     PREFIX_COLOR=$BRIGHT_GREEN
@@ -28,8 +30,8 @@ else
 fi
 
 if [[ $(locale charmap) != UTF-8 ]] || [ "$TERM" = linux ]; then
-    PREFIX=">"
-    LINECHAR="-"
+    PREFIX_CHAR=">"
+    LINE_CHAR="-"
     LINE_COLOR=""
 fi
 
@@ -53,8 +55,8 @@ update_terminal_cwd ()  {
 
 echo_line() {
   local FILL
-  let fillsize=${COLUMNS}-9
-  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 $fillsize))
+  (( fillsize = COLUMNS-9 ))
+  FILL=$(printf "${LINE_CHAR}%.0s" $(seq 1 "$fillsize"))
   echo "${LINE_COLOR}${FILL} $(date +%H:%M:%S)"
 }
 
@@ -70,11 +72,11 @@ calculate_ps1 () {
   # readline.
 
   PS1="\[${PROMPT_COLOR}\]\u@\h\[${GREEN}\]${PYTHON_PROMPT}"
-  PS1+="\[${YELLOW}\] \w \[${PREFIX_COLOR}\]${PREFIX}\[${RESET}\] "
+  PS1+="\[${YELLOW}\] \w \[${PREFIX_COLOR}\]${PREFIX_CHAR}\[${RESET}\] "
 }
 
 upinfo () {
-  echo -ne "${green}$HOSTNAME ${red}uptime is ${cyan} \t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
+  echo -ne "${GREEN}$HOSTNAME ${RED}uptime is ${CYAN} \t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
 }
 
 if [[ $OSTYPE == "darwin"* ]]; then
