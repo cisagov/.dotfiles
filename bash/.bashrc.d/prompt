@@ -13,7 +13,7 @@ RED=$(tput setaf 9)
 RESET=$(tput sgr0)
 YELLOW=$(tput setaf 3)
 
-LINECHAR="─"
+LINE_CHAR="─"
 PREFIX_CHAR="❱" # U+2771
 
 if [ ${UID} -eq 0 ]; then
@@ -31,7 +31,7 @@ fi
 
 if [[ $(locale charmap) != UTF-8 ]] || [ "$TERM" = linux ]; then
     PREFIX_CHAR=">"
-    LINECHAR="-"
+    LINE_CHAR="-"
     LINE_COLOR=""
 fi
 
@@ -56,7 +56,7 @@ update_terminal_cwd ()  {
 echo_line() {
   local FILL
   (( fillsize = COLUMNS-9 ))
-  FILL=$(printf "${LINECHAR}%.0s" $(seq 1 "$fillsize"))
+  FILL=$(printf "${LINE_CHAR}%.0s" $(seq 1 "$fillsize"))
   echo "${LINE_COLOR}${FILL} $(date +%H:%M:%S)"
 }
 
