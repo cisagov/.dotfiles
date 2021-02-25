@@ -2,9 +2,9 @@
 
 # Make some possibly destructive commands more interactive.
 if [ ${UID} -eq 0 ]; then
-    alias rm='rm -i'
-    alias mv='mv -i'
-    alias cp='cp -i'
+  alias rm='rm -i'
+  alias mv='mv -i'
+  alias cp='cp -i'
 fi
 
 # Add some easy shortcuts for formatted directory listings
