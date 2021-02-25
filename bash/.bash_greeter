@@ -110,7 +110,7 @@ __print_greeting ()
 {
     local STR_GREETING="-= welcome =-"
 
-    if [[ $(which figlet) ]]; then
+    if [[ $(command -v figlet) ]]; then
         #Print hostename with figlets
         __print_ascii_art "$STR_GREETING"
     else
