@@ -15,22 +15,22 @@ LINE_CHAR="─"
 PREFIX="❱" # U+2771
 
 if [ ${UID} -eq 0 ]; then
-    # root will autologout after 10 minutes
-    export TMOUT=1200
-    PROMPT_COLOR=$BRIGHT_RED
-    PREFIX_COLOR=$BRIGHT_RED
-    LINE_COLOR=$DARK_RED
-    PREFIX="➤"
+  # root will autologout after 10 minutes
+  export TMOUT=1200
+  PROMPT_COLOR=$BRIGHT_RED
+  PREFIX_COLOR=$BRIGHT_RED
+  LINE_COLOR=$DARK_RED
+  PREFIX="➤"
 else
-    PROMPT_COLOR=$MED_BLUE
-    PREFIX_COLOR=$BRIGHT_GREEN
-    LINE_COLOR=$DARK_GREY
+  PROMPT_COLOR=$MED_BLUE
+  PREFIX_COLOR=$BRIGHT_GREEN
+  LINE_COLOR=$DARK_GREY
 fi
 
 if [[ $(locale charmap) != UTF-8 ]] || [ "$TERM" = linux ]; then
-    PREFIX=">"
-    LINE_CHAR="-"
-    LINE_COLOR=""
+  PREFIX=">"
+  LINE_CHAR="-"
+  LINE_COLOR=""
 fi
 
 # Other possible prefix characters:
@@ -45,10 +45,10 @@ fi
 
 # Magic sent to Mac Terminal to update window header
 update_terminal_cwd ()  {
-    local SEARCH=' ';
-    local REPLACE='%20';
-    local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}";
-    printf '\e]7;%s\a' "$PWD_URL";
+  local SEARCH=' ';
+  local REPLACE='%20';
+  local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}";
+  printf '\e]7;%s\a' "$PWD_URL";
 }
 
 echo_line() {
@@ -60,9 +60,9 @@ echo_line() {
 
 calculate_ps1 () {
   if [ -v VIRTUAL_ENV ]; then
-      PYTHON_PROMPT="(🐍${VIRTUAL_ENV##*/})"
+    PYTHON_PROMPT="(🐍${VIRTUAL_ENV##*/})"
   else
-      unset PYTHON_PROMPT
+    unset PYTHON_PROMPT
   fi
 
   # Make sure PS1 uses RL_PROMPT_START_IGNORE and RL_PROMPT_END_IGNORE
