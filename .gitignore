@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 .DS_Store
+=======
+# This file specifies intentionally untracked files that Git should ignore.
+# Files already tracked by Git are not affected.
+# See: https://git-scm.com/docs/gitignore
+
+## Python ##
+__pycache__
+>>>>>>> b0e7f014e3710850cf60daddec3983fcd2a1f259
 .mypy_cache
 .python-version
 __pycache__
