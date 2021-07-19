@@ -4,7 +4,7 @@
 export PIP_DOWNLOAD_CACHE=$HOME/Library/Caches/pip-downloads
 
 # Upgrade all outdated packages
-pipupgrade () {
+pipupgrade() {
   local OLD
   local OLDFMT
   echo "Collecting info on outdated packages..."
