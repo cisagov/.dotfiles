@@ -38,10 +38,8 @@ export COPYFILE_DISABLE=true
 ulimit -n 2048
 
 # Load other files
-if [ -d ~/.bashrc.d ]
-then
-  for f in ~/.bashrc.d/*
-  do
+if [ -d ~/.bashrc.d ]; then
+  for f in ~/.bashrc.d/*; do
     # shellcheck disable=SC1090
     source "$f"
   done
@@ -52,6 +50,6 @@ source "$HOME/.bash_greeter"
 
 export NVM_DIR="$HOME/.nvm"
 # shellcheck source=/dev/null
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 # shellcheck source=/dev/null
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

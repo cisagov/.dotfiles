@@ -44,21 +44,21 @@ fi
 # Round arrow        U+279C ➜
 
 # Magic sent to Mac Terminal to update window header
-update_terminal_cwd ()  {
-  local SEARCH=' ';
-  local REPLACE='%20';
-  local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}";
-  printf '\e]7;%s\a' "$PWD_URL";
+update_terminal_cwd() {
+  local SEARCH=' '
+  local REPLACE='%20'
+  local PWD_URL="file://$HOSTNAME${PWD//$SEARCH/$REPLACE}"
+  printf '\e]7;%s\a' "$PWD_URL"
 }
 
 echo_line() {
   local FILL
-  (( fillsize=COLUMNS-9 ))
+  ((fillsize = COLUMNS - 9))
   FILL=$(printf "${LINE_CHAR}%.0s" $(seq 1 fillsize))
   echo "${LINE_COLOR}${FILL} $(date +%H:%M:%S)"
 }
 
-calculate_ps1 () {
+calculate_ps1() {
   if [ -v VIRTUAL_ENV ]; then
     PYTHON_PROMPT="(🐍${VIRTUAL_ENV##*/})"
   else
@@ -73,8 +73,9 @@ calculate_ps1 () {
   PS1+="\[${YELLOW}\] \w \[${PREFIX_COLOR}\]${PREFIX}\[${RESET}\] "
 }
 
-upinfo () {
-  echo -ne "${GREEN}$HOSTNAME ${RED}uptime is ${CYAN} \t ";uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
+upinfo() {
+  echo -ne "${GREEN}$HOSTNAME ${RED}uptime is ${CYAN} \t "
+  uptime | awk /'up/ {print $3,$4,$5,$6,$7,$8,$9,$10}'
 }
 
 if [[ $OSTYPE == "darwin"* ]]; then
