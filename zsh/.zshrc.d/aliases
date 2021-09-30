@@ -17,7 +17,7 @@ alias ls='ls -lF'
 #alias grep='grep --color=auto --exclude=\.svn'
 alias grep='grep --color=auto --exclude-dir=.hg --exclude-dir=.svn --exclude-dir=.git'
 
-alias fuck='sudo $(history -p \!\!)'
+alias doh='sudo $(history -p \!\!)'
 
 # Workaround for a Mac-specific issue that affects ansible
 # See https://github.com/ansible/ansible/issues/32499 for details
