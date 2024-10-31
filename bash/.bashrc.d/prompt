@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # Disable SC2034 to allow colors not currently in use to remain
 # shellcheck disable=SC2034
 BLUE=$(tput setaf 4)

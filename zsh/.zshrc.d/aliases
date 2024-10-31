@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 # Make some possibly destructive commands more interactive.
 if [ ${UID} -eq 0 ]; then
   alias rm='rm -i'
