@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 BLUE=$(tput setaf 4)
 BRIGHT_GREEN=$(tput setaf 10)
 BRIGHT_RED=$(tput setaf 196)

@@ -1,3 +1,1 @@
-#!/bin/zsh
-
 export AWS_PROFILE="cool-user"
