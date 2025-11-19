@@ -1,6 +1,8 @@
 # .dotfiles - Portable configuration files #
 
 [![GitHub Build Status](https://github.com/cisagov/.dotfiles/workflows/build/badge.svg)](https://github.com/cisagov/.dotfiles/actions)
+[![License](https://img.shields.io/github/license/cisagov/.dotfiles)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/.dotfiles/workflows/CodeQL/badge.svg)](https://github.com/cisagov/.dotfiles/actions/workflows/codeql-analysis.yml)
 
 This is an example repository for using a `.dotfiles` repository with `stow`
 to make your preferences portable across machines.
