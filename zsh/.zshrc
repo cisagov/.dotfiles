@@ -141,10 +141,8 @@ export COPYFILE_DISABLE=true
 ulimit -n 2048
 
 # Load files from the .zshrc.d subdirectory for ease and modularity
-if [ -d ~/.zshrc.d ]
-then
-  for f in ~/.zshrc.d/*
-  do
+if [ -d ~/.zshrc.d ]; then
+  for f in ~/.zshrc.d/*; do
     source "$f"
   done
 fi
